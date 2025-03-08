@@ -5,8 +5,6 @@
     // ✅ 1. External Libraries First
   import { onMount, tick } from 'svelte';
   import { writable, get } from 'svelte/store'; 
-  import Router from "svelte-spa-router";
-  import routes from "../routes.js";
 
   // ✅ 2. Store Imports Next (No Duplicates)
   import { 
@@ -524,10 +522,6 @@ async function togglePOI(poi) {
 </script>
 
 
-<!-- Router -->
-<main>
-  <Router {routes} />
-</main>
 
 <style>
   @import 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css';
