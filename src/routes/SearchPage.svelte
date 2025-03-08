@@ -820,7 +820,6 @@ body {
 <div class="moving">
 <a href="#/moving-services" class="nav-button">🚛 Moving Services</a>
 </div>
-  {#if !$showComparePage}  <!-- ❌ Missing `$` -->
   <div class="content-container">
   <!-- Page Title -->
   <!-- View Toggle -->
