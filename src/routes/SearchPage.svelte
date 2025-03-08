@@ -388,10 +388,6 @@ async function applyFilters() {
 </script>
 
 
-<!-- Router -->
-<main>
-  <Router {routes} />
-</main>
 
 <style>
   @import 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css';
