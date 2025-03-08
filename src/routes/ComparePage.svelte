@@ -17,7 +17,7 @@
   getCompareData, 
   updateUserPreferences,
   findNearestPlace
-} from './store.js';
+} from '../store.js';
 
  const currentRoute = writable(window.location.hash.replace("#", "") || "/");
   
