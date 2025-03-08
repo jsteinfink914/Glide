@@ -5,14 +5,10 @@
     // ✅ 1. External Libraries First
   import Router from "svelte-spa-router";
   import routes from "../routes.js";
+  import { writable } from "svelte/store";
 
 
- const currentRoute = writable(window.location.hash.replace("#", "") || "/");
-  
-  // Listen for hash changes
-  window.addEventListener("hashchange", () => {
-    currentRoute.set(window.location.hash.replace("#", "") || "/");
-  });
+
 
 
 
