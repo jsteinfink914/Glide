@@ -75,14 +75,6 @@
     background: #333;
   }
 
-  .dashboard-title {
-    position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    font-size: 2rem;
-    font-weight: bold;
-    color: black;
-  }
 
   .property-title {
     font-size: 4rem;
@@ -156,9 +148,6 @@
     margin-bottom: 0.5rem;
   }
 
-  .status .icon {
-    margin-right: 0.5rem;
-  }
 
   .maintenance {
     font-size: 1.2rem;
@@ -199,9 +188,7 @@
         font-size: 2.2rem;
     }
 
-    .dashboard-title {
-        font-size: 1.5rem;
-    }
+    
 
     .filter-buttons {
         gap: 5px;

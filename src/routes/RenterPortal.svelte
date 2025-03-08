@@ -78,14 +78,6 @@
     background: #f1f1f1;
   }
 
-  .portal-title {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    font-size: 2rem;
-    font-weight: bold;
-    color: black;
-  }
 
   .property-title {
     font-size: 3rem;
@@ -125,19 +117,10 @@
     background: #EAEAEA;
   }
 
-  .icon {
-    margin-right: 12px;
-    font-size: 1.5rem;
-    color: #0d4727;
-  }
 
   @media (max-width: 600px) {
     .property-title {
       font-size: 2.2rem;
-    }
-
-    .portal-title {
-      font-size: 1.5rem;
     }
 
     .portal-buttons {

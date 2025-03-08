@@ -48,42 +48,9 @@
   }
 
   /* ✅ Menu Button */
-  .menu-button {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-  }
 
-  .circle-button {
-    width: 3.5rem;
-    height: 3.5rem;
-    background: black;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
 
-  .circle-button:hover {
-    background: #333;
-  }
 
-  .icon {
-    color: white;
-    font-size: 1.8rem;
-  }
-
-  /* ✅ Typography */
-  .logo {
-    position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    font-size: 2rem;
-    font-weight: bold;
-    color: black;
-  }
 
   .page-title {
     font-size: 3rem;

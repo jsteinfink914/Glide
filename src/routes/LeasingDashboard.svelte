@@ -109,15 +109,6 @@
     padding: 0;
   }
 
-  body {
-    font-family: 'Playfair Display', serif;
-    background-color: #FBF7F0;
-    overflow-x: hidden; /* ✅ Prevents horizontal scrolling */
-    margin: 0;
-    padding: 0;
-    width: 100%;
-  }
-
   .page-container {
     display: flex;
     flex-direction: column;
