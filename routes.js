@@ -5,6 +5,7 @@ import PaymentPage from "./src/routes/PaymentPage.svelte";
 import LeasingDashboard from "./src/routes/LeasingDashboard.svelte";
 import SearchPage from "./src/routes/SearchPage.svelte";
 import ComparePage from "./src/routes/ComparePage.svelte";
+import Home from "./src/routes/Home.svelte";
 
 
 

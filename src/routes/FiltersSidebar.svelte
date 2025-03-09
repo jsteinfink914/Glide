@@ -434,3 +434,442 @@
     color: #666;
   }
 </style>
+<script>
+  import { createEventDispatcher } from 'svelte';
+  
+  // Event dispatcher for communicating with parent
+  const dispatch = createEventDispatcher();
+  
+  // Define filter options
+  export let filters = {
+    price: {
+      min: 0,
+      max: 10000,
+      active: false
+    },
+    beds: {
+      min: 0,
+      max: 5,
+      active: false
+    },
+    baths: {
+      min: 0,
+      max: 5,
+      active: false
+    },
+    sqft: {
+      min: 0,
+      max: 5000,
+      active: false
+    },
+    amenities: {
+      dishwasher: false,
+      laundryInBuilding: false,
+      doorman: false,
+      elevator: false,
+      gym: false,
+      pets: false
+    },
+    locations: {
+      groceryStore: "",
+      gym: "",
+      transit: ""
+    }
+  };
+  
+  // Handle price range changes
+  function handlePriceChange() {
+    filters.price.active = true;
+    dispatch('filter', filters);
+  }
+  
+  // Handle beds range changes
+  function handleBedsChange() {
+    filters.beds.active = true;
+    dispatch('filter', filters);
+  }
+  
+  // Handle baths range changes
+  function handleBathsChange() {
+    filters.baths.active = true;
+    dispatch('filter', filters);
+  }
+  
+  // Handle sqft range changes
+  function handleSqftChange() {
+    filters.sqft.active = true;
+    dispatch('filter', filters);
+  }
+  
+  // Handle amenity selection changes
+  function handleAmenityChange() {
+    dispatch('filter', filters);
+  }
+  
+  // Handle location input changes
+  function handleLocationChange() {
+    dispatch('filter', filters);
+  }
+  
+  // Reset all filters
+  function resetFilters() {
+    filters = {
+      price: {
+        min: 0,
+        max: 10000,
+        active: false
+      },
+      beds: {
+        min: 0,
+        max: 5,
+        active: false
+      },
+      baths: {
+        min: 0,
+        max: 5,
+        active: false
+      },
+      sqft: {
+        min: 0,
+        max: 5000,
+        active: false
+      },
+      amenities: {
+        dishwasher: false,
+        laundryInBuilding: false,
+        doorman: false,
+        elevator: false,
+        gym: false,
+        pets: false
+      },
+      locations: {
+        groceryStore: "",
+        gym: "",
+        transit: ""
+      }
+    };
+    dispatch('filter', filters);
+  }
+</script>
+
+<div class="filters-sidebar">
+  <div class="header">
+    <h2>Filters</h2>
+    <button class="reset-button" on:click={resetFilters}>Reset</button>
+  </div>
+  
+  <div class="filter-section">
+    <h3>Price Range</h3>
+    <div class="range-inputs">
+      <div class="input-group">
+        <label for="price-min">Min $</label>
+        <input 
+          type="number" 
+          id="price-min" 
+          bind:value={filters.price.min} 
+          on:input={handlePriceChange} 
+        />
+      </div>
+      <div class="input-group">
+        <label for="price-max">Max $</label>
+        <input 
+          type="number" 
+          id="price-max" 
+          bind:value={filters.price.max} 
+          on:input={handlePriceChange} 
+        />
+      </div>
+    </div>
+  </div>
+  
+  <div class="filter-section">
+    <h3>Bedrooms</h3>
+    <div class="range-inputs">
+      <div class="input-group">
+        <label for="beds-min">Min</label>
+        <input 
+          type="number" 
+          id="beds-min" 
+          bind:value={filters.beds.min} 
+          on:input={handleBedsChange} 
+          min="0" 
+          max="5"
+        />
+      </div>
+      <div class="input-group">
+        <label for="beds-max">Max</label>
+        <input 
+          type="number" 
+          id="beds-max" 
+          bind:value={filters.beds.max} 
+          on:input={handleBedsChange} 
+          min="0" 
+          max="5"
+        />
+      </div>
+    </div>
+  </div>
+  
+  <div class="filter-section">
+    <h3>Bathrooms</h3>
+    <div class="range-inputs">
+      <div class="input-group">
+        <label for="baths-min">Min</label>
+        <input 
+          type="number" 
+          id="baths-min" 
+          bind:value={filters.baths.min} 
+          on:input={handleBathsChange} 
+          min="0" 
+          max="5" 
+          step="0.5"
+        />
+      </div>
+      <div class="input-group">
+        <label for="baths-max">Max</label>
+        <input 
+          type="number" 
+          id="baths-max" 
+          bind:value={filters.baths.max} 
+          on:input={handleBathsChange} 
+          min="0" 
+          max="5"
+          step="0.5"
+        />
+      </div>
+    </div>
+  </div>
+  
+  <div class="filter-section">
+    <h3>Square Footage</h3>
+    <div class="range-inputs">
+      <div class="input-group">
+        <label for="sqft-min">Min</label>
+        <input 
+          type="number" 
+          id="sqft-min" 
+          bind:value={filters.sqft.min} 
+          on:input={handleSqftChange} 
+          min="0" 
+        />
+      </div>
+      <div class="input-group">
+        <label for="sqft-max">Max</label>
+        <input 
+          type="number" 
+          id="sqft-max" 
+          bind:value={filters.sqft.max} 
+          on:input={handleSqftChange} 
+          min="0" 
+        />
+      </div>
+    </div>
+  </div>
+  
+  <div class="filter-section">
+    <h3>Amenities</h3>
+    <div class="checkbox-group">
+      <label>
+        <input 
+          type="checkbox" 
+          bind:checked={filters.amenities.dishwasher} 
+          on:change={handleAmenityChange}
+        />
+        Dishwasher
+      </label>
+      
+      <label>
+        <input 
+          type="checkbox" 
+          bind:checked={filters.amenities.laundryInBuilding} 
+          on:change={handleAmenityChange}
+        />
+        Laundry in Building
+      </label>
+      
+      <label>
+        <input 
+          type="checkbox" 
+          bind:checked={filters.amenities.doorman} 
+          on:change={handleAmenityChange}
+        />
+        Doorman
+      </label>
+      
+      <label>
+        <input 
+          type="checkbox" 
+          bind:checked={filters.amenities.elevator} 
+          on:change={handleAmenityChange}
+        />
+        Elevator
+      </label>
+      
+      <label>
+        <input 
+          type="checkbox" 
+          bind:checked={filters.amenities.gym} 
+          on:change={handleAmenityChange}
+        />
+        Gym
+      </label>
+      
+      <label>
+        <input 
+          type="checkbox" 
+          bind:checked={filters.amenities.pets} 
+          on:change={handleAmenityChange}
+        />
+        Pet Friendly
+      </label>
+    </div>
+  </div>
+  
+  <div class="filter-section">
+    <h3>Nearby Locations</h3>
+    <div class="location-inputs">
+      <div class="input-group">
+        <label for="grocery-store">Grocery Store</label>
+        <input 
+          type="text" 
+          id="grocery-store" 
+          bind:value={filters.locations.groceryStore} 
+          on:input={handleLocationChange} 
+          placeholder="Enter address"
+        />
+      </div>
+      
+      <div class="input-group">
+        <label for="gym-location">Gym</label>
+        <input 
+          type="text" 
+          id="gym-location" 
+          bind:value={filters.locations.gym} 
+          on:input={handleLocationChange} 
+          placeholder="Enter address"
+        />
+      </div>
+      
+      <div class="input-group">
+        <label for="transit">Transit Station</label>
+        <input 
+          type="text" 
+          id="transit" 
+          bind:value={filters.locations.transit} 
+          on:input={handleLocationChange} 
+          placeholder="Enter address"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .filters-sidebar {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 10px;
+  }
+  
+  .header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .reset-button {
+    background: transparent;
+    border: none;
+    color: #3c95b8;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .reset-button:hover {
+    text-decoration: underline;
+  }
+  
+  .filter-section {
+    margin-bottom: 24px;
+  }
+  
+  .filter-section h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .range-inputs {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .input-group label {
+    font-size: 0.85rem;
+    color: #666;
+  }
+  
+  input[type="number"],
+  input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.95rem;
+  }
+  
+  input[type="number"]:focus,
+  input[type="text"]:focus {
+    outline: none;
+    border-color: #3c95b8;
+    box-shadow: 0 0 0 2px rgba(60, 149, 184, 0.2);
+  }
+  
+  .checkbox-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  input[type="checkbox"] {
+    accent-color: #3c95b8;
+    width: 16px;
+    height: 16px;
+  }
+  
+  .location-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+</style>
