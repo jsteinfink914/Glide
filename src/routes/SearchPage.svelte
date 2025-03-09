@@ -1,6 +1,4 @@
-
-    
-   <script>
+<script>
 
     // ✅ 1. External Libraries First
   import { onMount, tick } from 'svelte';
@@ -21,7 +19,7 @@
 } from '../store.js';
 
  const currentRoute = writable(window.location.hash.replace("#", "") || "/");
-  
+
   // Listen for hash changes
   window.addEventListener("hashchange", () => {
     currentRoute.set(window.location.hash.replace("#", "") || "/");
@@ -124,12 +122,12 @@ function toggleViewMode() {
   })
   }
 
-  
+
 
 
   const updatePreferences = async () => {
     console.log("🔄 Updating user preferences...");
-    
+
     const prefs = get(userPreferences);
     await updateUserPreferences({ 
         grocery: groceryStore, 
@@ -188,7 +186,7 @@ function toggleViewMode() {
     markers.forEach(marker => marker.setMap(null));
     markers = [];
     listingMarkers.clear();
-   
+
 
     listingsData.forEach((listing,index) => {
         if (listing.lat && listing.lon) {
@@ -221,8 +219,8 @@ function toggleViewMode() {
         }
               });
   }
-  
- 
+
+
 function addPOIMarkers(listing) {
     if (!listing.nearestPOIs) return;
 
@@ -279,7 +277,7 @@ function closeAllRouteInfoWindows() {
 
 
 
- 
+
 
 
 
@@ -391,7 +389,7 @@ async function applyFilters() {
 
 <style>
   @import 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css';
-  
+
   #container {
     display: flex;
     height: 100vh;
@@ -403,7 +401,7 @@ async function applyFilters() {
     width: 100%;
     height: 500px;
   }
-  
+
   .listing-container {
     display: flex;
     flex-wrap: wrap;
@@ -423,11 +421,11 @@ async function applyFilters() {
   .listings-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 2 wide */
-    gap: 25px; /* Space between tiles */
+    gap: 2rem; /* Space between tiles */
     width: 100%;
     max-width: 90%; /* Keeps layout clean */
     margin: auto;
-    padding: 10px;
+    padding: 1rem;
 }
 .quick-apply-button {
    background-color: #007bff;
@@ -460,6 +458,7 @@ async function applyFilters() {
     transition: transform 0.2s;
     width: 100%; /* Adjust to grid */
     max-width: 400px; /* Prevents them from being too large */
+    margin-bottom: 1rem; /* Added margin for spacing */
 }
 
 .listing-card:hover {
@@ -529,8 +528,8 @@ async function applyFilters() {
     width: 100%;
     height: 100%;
   }
-  
- 
+
+
   .listing-details {
     width: 100%;
     max-width: 1200px;
@@ -577,7 +576,7 @@ async function applyFilters() {
   }
 
 
-  
+
 
  .filter-sidebar {
     position: fixed;
@@ -921,4 +920,3 @@ body {
         </div>
     </div>
 </div>
-
