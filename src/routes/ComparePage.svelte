@@ -501,6 +501,7 @@ async function togglePOI(poi) {
 
 
   onMount(() => {
+    compareListings.set(data); 
     window.addEventListener("scroll", handleScroll);
   loadGoogleMapsScript(() =>{
     listings.subscribe(l => {

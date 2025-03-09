@@ -36,7 +36,15 @@
 .glide-banner:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
-
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    font-family: 'Editorial New', serif;
+}
 
 
 </style>

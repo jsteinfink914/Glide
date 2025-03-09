@@ -111,7 +111,7 @@ function toggleViewMode() {
       callback();
       return;
     }
-    fetch('/api/maps-key')
+    fetch('../api/maps-key')
         .then(response => response.json())
         .then(({ key }) => {
             if (!key) throw new Error("Missing API key from backend.");
