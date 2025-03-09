@@ -3,7 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Glide</title>
+    <title>Rental Search App</title>
+    <script>
+      // Define a callback function that will be called when Maps API is loaded
+      function initGoogleMapsApi() {
+        window.mapsApiLoaded = true;
+        // Dispatch an event so components can react to the API being loaded
+        window.dispatchEvent(new Event('google-maps-loaded'));
+      }
+
+      // Handle API loading errors
+      function handleMapsApiError() {
+        console.error('Google Maps API failed to load');
+        alert('Could not load Google Maps. Please check your API key and internet connection.');
+      }
+    </script>
+    <script 
+      src="/api/maps-key"
+      onload="fetch(this.src).then(r => r.json()).then(data => {
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&libraries=places&callback=initGoogleMapsApi`;
+        script.async = true;
+        script.defer = true;
+        script.onerror = handleMapsApiError;
+        document.head.appendChild(script);
+      })"
+    ></script>
   </head>
   <body>
     <div id="app"></div>

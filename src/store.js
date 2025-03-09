@@ -33,7 +33,7 @@ async function fetchListingsFromCSV() {
 */
 function parseCSV(csvText) {
   const rows = csvText.trim().split("\n").map(row => row.split(","));
-  
+
   console.log("🛠️ Raw CSV Data:", rows);
 
   return rows
@@ -103,7 +103,7 @@ export async function findNearestPlace(listing, type, keyword) {
       const response = await fetch(url, { cache: 'no-store' });
       const data = await response.json();
       console.log(`Response for ${type} (${keyword}) at ${listing.address}:`, data);
-      
+
       if (data.results && data.results.length > 0) {
         const sortedResults = data.results.sort((a, b) => {
           const distA = haversineDistance(listing.lat, listing.lon, a.geometry.location.lat, a.geometry.location.lng);
@@ -207,7 +207,61 @@ function haversineDistance(lat1, lon1, lat2, lon2) {
       Math.cos(lat1 * (Math.PI / 180)) * 
       Math.cos(lat2 * (Math.PI / 180)) * 
       Math.sin(dLon / 2) * Math.sin(dLon / 2);
-  
+
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
+
+// This is the function that loads listings from CSV
+async function lr(){
+  const u=await(await fetch("/public/2016-12-20.csv")).text();
+  return new Promise(a=>{
+    hr.parse(u,{
+      header:!0,
+      dynamicTyping:!0,
+      complete:async d=>{
+        const p=await Promise.all(d.data.map(async b=>{
+          const y=await ur(b.address);
+          return y?{...b,lat:y.lat,lon:y.lon}:b
+        }));
+        a(p)
+      }
+    })
+  })
+}
+
+// Added function to fetch listings with filters
+async function fetchListings(filters = {}) {
+  try {
+    // First, try to get listings from the store
+    const listings = get($e);
+
+    if (listings && listings.length > 0) {
+      return filterListings(listings, filters);
+    } else {
+      // If no listings in store, load them from CSV
+      const newListings = await lr();
+      $e.set(newListings);
+      return filterListings(newListings, filters);
+    }
+  } catch (error) {
+    console.error("Error fetching listings:", error);
+    return [];
+  }
+}
+
+// Helper function to filter listings based on criteria
+function filterListings(listings, filters) {
+  return listings.filter(listing => {
+    // Apply filters if they exist
+    if (filters.minPrice && listing.price < filters.minPrice) return false;
+    if (filters.maxPrice && listing.price > filters.maxPrice) return false;
+    if (filters.minBeds && listing.beds < filters.minBeds) return false;
+    if (filters.maxBeds && listing.beds > filters.maxBeds) return false;
+    if (filters.search && !listing.address.toLowerCase().includes(filters.search.toLowerCase())) return false;
+    return true;
+  });
+}
+
+// Make sure fetchListings is globally available
+window.fetchListings = fetchListings;
