@@ -505,21 +505,10 @@ async function togglePOI(poi) {
   onMount(() => {
     compareListings.set(getCompareData()); 
   loadGoogleMapsScript(() =>{
-    listings.subscribe(l => {
-      if (l.length > 0) {
-        console.log("✅ Listings loaded, checking if map should initialize...");
-        if ($showComparePage && l.some(item => item.lat && item.lon)) { 
-          console.log("✅ Initializing Leaflet map with:", l);
-          initializeMap(l,true);
-        } else {
-          console.warn("⚠️ Map not initialized - missing lat/lon or compare page not active.");
-        }
-      } else {
-        console.warn("⚠️ Listings not yet loaded.");
-      }
+    initializeMap(compareListings,true);
     });
   });
-  });
+
 
 </script>
 
