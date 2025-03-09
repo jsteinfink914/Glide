@@ -507,7 +507,7 @@ async function togglePOI(poi) {
     compareListings.set(Array.isArray(data) ? data : []);
     await tick();
   loadGoogleMapsScript(() =>{
-    initializeMap(compareListings,true);
+    initializeMap(get(compareListings),true);
     });
   });
 
