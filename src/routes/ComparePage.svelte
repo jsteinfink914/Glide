@@ -503,7 +503,9 @@ async function togglePOI(poi) {
 
 
   onMount(() => {
-    compareListings.set(getCompareData()); 
+    const data = getCompareData();
+    compareListings.set(Array.isArray(data) ? data : []);
+
   loadGoogleMapsScript(() =>{
     initializeMap(compareListings,true);
     });
