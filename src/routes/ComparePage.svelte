@@ -68,11 +68,13 @@ let filters = writable({
 
 
 
-  let sidebarOpen = false;
-  function toggleSidebar() {
-    sidebarOpen = !sidebarOpen;
-    console.log("Sidebar state:", sidebarOpen); // Debugging
-  }
+ let sidebarOpen = writable(false);
+
+function toggleSidebar() {
+    sidebarOpen.update(open => !open);
+    console.log("Sidebar state:", get(sidebarOpen)); // ✅ Debugging
+}
+
 
   function toggleShowMode() {
     showMode.update(mode => (mode === "onClick" ? "showAll" : "onClick"));
@@ -1025,7 +1027,7 @@ body {
 <a href="#/moving-services" class="nav-button">🚛 Moving Services</a>
 </div>
   <div id="container">
-    <button class="sidebar-toggle" class:open={sidebarOpen} on:click={toggleSidebar}>
+    <button class="sidebar-toggle" class:open={$sidebarOpen} on:click={toggleSidebar}>
       {sidebarOpen ? "❌ Close" : "⚙ Preferences"}
     </button>
     <div id="sidebar" class="{sidebarOpen ? 'open' : ''}">
